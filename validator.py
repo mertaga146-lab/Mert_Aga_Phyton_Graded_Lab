@@ -7,7 +7,14 @@ def load_airports(path: str) -> set[str]:
     One code per line. Strip whitespace; skip blank lines and lines
     starting with '#'.
     """
-    raise NotImplementedError
+    codes = set()
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            codes.add(line)
+    return codes
 
 
 def validate_row(fields: list[str], airports: set[str]) -> str | None:
